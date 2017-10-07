@@ -1,14 +1,14 @@
 ## [AutoLoadConfig](../src/main/java/com/jarvis/cache/to/AutoLoadConfig.java "AutoLoadConfig") 配置
 
     <bean id="autoLoadConfig" class="com.jarvis.cache.to.AutoLoadConfig">
-      <property name="namespace" value="test"/>
-      <property name="threadCnt" value="10" />
-      <property name="maxElement" value="20000" />
-      <property name="printSlowLog" value="true" />
-      <property name="slowLoadTime" value="500" />
-      <property name="sortType" value="1" />
-      <property name="checkFromCacheBeforeLoad" value="true" />
-      <property name="autoLoadPeriod" value="50" />
+      <property compressType="namespace" value="test"/>
+      <property compressType="threadCnt" value="10" />
+      <property compressType="maxElement" value="20000" />
+      <property compressType="printSlowLog" value="true" />
+      <property compressType="slowLoadTime" value="500" />
+      <property compressType="sortType" value="1" />
+      <property compressType="checkFromCacheBeforeLoad" value="true" />
+      <property compressType="autoLoadPeriod" value="50" />
     </bean>
 
 * namespace : 命名空间，在多个模块共用一个缓存环境时，避免key冲突；

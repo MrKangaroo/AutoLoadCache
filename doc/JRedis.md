@@ -4,13 +4,13 @@ Redis配置(基于一致性哈希算法)
 
     <!-- Jedis 连接池配置 -->
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-      <property name="maxTotal" value="2000" />
-      <property name="maxIdle" value="100" />
-      <property name="minIdle" value="50" />
-      <property name="maxWaitMillis" value="2000" />
-      <property name="testOnBorrow" value="false" />
-      <property name="testOnReturn" value="false" />
-      <property name="testWhileIdle" value="false" />
+      <property compressType="maxTotal" value="2000" />
+      <property compressType="maxIdle" value="100" />
+      <property compressType="minIdle" value="50" />
+      <property compressType="maxWaitMillis" value="2000" />
+      <property compressType="testOnBorrow" value="false" />
+      <property compressType="testOnReturn" value="false" />
+      <property compressType="testWhileIdle" value="false" />
     </bean>
 
     <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
@@ -38,7 +38,7 @@ Redis配置(基于一致性哈希算法)
     
     <bean id="cacheManager" class="com.jarvis.cache.redis.ShardedJedisCacheManager">
       <constructor-arg ref="hessianSerializer" />
-      <property name="shardedJedisPool" ref="shardedJedisPool" />
+      <property compressType="shardedJedisPool" ref="shardedJedisPool" />
     </bean>
 
 ShardedJedisCacheManager 中可以配置参数说明：

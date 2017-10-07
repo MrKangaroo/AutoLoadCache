@@ -13,16 +13,16 @@ public class CommonsCompressor implements ICompressor {
 
     private static final CompressorStreamFactory factory=new CompressorStreamFactory();
 
-    private String name;
+    private String compressType;
 
-    public CommonsCompressor(String name) {
-        this.name=name;
+    public CommonsCompressor(String compressType) {
+        this.compressType = compressType;
     }
 
     @Override
     public byte[] compress(ByteArrayInputStream bais) throws Exception {
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
-        CompressorOutputStream cos=factory.createCompressorOutputStream(name, baos);
+        CompressorOutputStream cos=factory.createCompressorOutputStream(compressType, baos);
         int len;
         byte buf[]=new byte[BUFFER];
         while((len=bais.read(buf, 0, BUFFER)) != -1) {
@@ -40,7 +40,7 @@ public class CommonsCompressor implements ICompressor {
     @Override
     public byte[] decompress(ByteArrayInputStream bais) throws Exception {
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
-        CompressorInputStream cis=factory.createCompressorInputStream(name, bais);
+        CompressorInputStream cis=factory.createCompressorInputStream(compressType, bais);
         int len;
         byte buf[]=new byte[BUFFER];
         while((len=cis.read(buf, 0, BUFFER)) != -1) {

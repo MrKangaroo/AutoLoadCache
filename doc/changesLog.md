@@ -167,7 +167,7 @@
 
             <bean id="autoLoadConfig" class="com.jarvis.cache.to.AutoLoadConfig">
               ... ...
-              <property name="autoLoadPeriod" value="50" /><!--默认值50ms-->
+              <property compressType="autoLoadPeriod" value="50" /><!--默认值50ms-->
             </bean>
 
     * 优化AbstractCacheManager类的loadData方法中线程同步锁。
@@ -192,9 +192,9 @@
         <bean id="hessianSerializer" class="com.jarvis.cache.serializer.HessianSerializer" />
         <bean id="cachePointCut" class="com.jarvis.cache.redis.ShardedCachePointCut" destroy-method="destroy">
           <constructor-arg ref="autoLoadConfig" />
-          <property name="serializer" ref="hessianSerializer" />
-          <property name="shardedJedisPool" ref="shardedJedisPool" />
-          <property name="namespace" value="test" />
+          <property compressType="serializer" ref="hessianSerializer" />
+          <property compressType="shardedJedisPool" ref="shardedJedisPool" />
+          <property compressType="namespace" value="test" />
         </bean>
 
     虽然Kryo效率比较高，但使用Kryo会出现的问题比较多，所以还是慎重使用，系统经常维护的就不太适合使用，经过测试，改变属性名称，或删除中间的属性等情况都可能反序列出错误的值，所以如果遇到有减少或修改的情况要及时清里缓存。如果是增加属性则会反序列化失败，这正符合我们的要求。

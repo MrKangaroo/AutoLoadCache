@@ -16,16 +16,17 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 解析JavaScript表达式
+ *
  * @author jiayu.qiu
  */
 @Slf4j
 public class JavaScriptParser extends AbstractScriptParser {
 
-    private final ScriptEngineManager manager=new ScriptEngineManager();
+    private final ScriptEngineManager manager = new ScriptEngineManager();
 
-    private final ConcurrentHashMap<String, CompiledScript> expCache=new ConcurrentHashMap<String, CompiledScript>();
+    private final ConcurrentHashMap<String, CompiledScript> expCache = new ConcurrentHashMap<String, CompiledScript>();
 
-    private final StringBuffer funcs=new StringBuffer();
+    private final StringBuffer funcs = new StringBuffer();
 
     private static int versionCode;
 
@@ -35,23 +36,23 @@ public class JavaScriptParser extends AbstractScriptParser {
     private final ScriptEngine engine;
 
     static {
-        String javaVersion=System.getProperty("java.version");
-        int ind=0;
-        for(int i=0; i < 2; i++) {
-            ind=javaVersion.indexOf(".", ind);
+        String javaVersion = System.getProperty("java.version");
+        int ind = 0;
+        for (int i = 0; i < 2; i++) {
+            ind = javaVersion.indexOf(".", ind);
             ind++;
         }
-        javaVersion=javaVersion.substring(0, ind);
-        javaVersion=javaVersion.replaceAll("\\.", "");
-        versionCode=Integer.parseInt(javaVersion);
+        javaVersion = javaVersion.substring(0, ind);
+        javaVersion = javaVersion.replaceAll("\\.", "");
+        versionCode = Integer.parseInt(javaVersion);
     }
 
     public JavaScriptParser() {
-        engine=manager.getEngineByName(versionCode >= 18 ? "nashorn" : "javascript");
+        engine = manager.getEngineByName(versionCode >= 18 ? "nashorn" : "javascript");
         try {
             addFunction(HASH, CacheUtil.class.getDeclaredMethod("getUniqueHashStr", new Class[]{Object.class}));
             addFunction(EMPTY, CacheUtil.class.getDeclaredMethod("isEmpty", new Class[]{Object.class}));
-        } catch(Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
     }
@@ -59,10 +60,10 @@ public class JavaScriptParser extends AbstractScriptParser {
     @Override
     public void addFunction(String name, Method method) {
         try {
-            String clsName=method.getDeclaringClass().getName();
-            String methodName=method.getName();
+            String clsName = method.getDeclaringClass().getName();
+            String methodName = method.getName();
             funcs.append("function " + name + "(obj){return " + clsName + "." + methodName + "(obj);}");
-        } catch(Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
     }
@@ -70,22 +71,22 @@ public class JavaScriptParser extends AbstractScriptParser {
     @SuppressWarnings("unchecked")
     @Override
     public <T> T getElValue(String exp, Object[] arguments, Object retVal, boolean hasRetVal, Class<T> valueType) throws Exception {
-        Bindings bindings=new SimpleBindings();
+        Bindings bindings = new SimpleBindings();
         bindings.put(ARGS, arguments);
-        if(hasRetVal) {
+        if (hasRetVal) {
             bindings.put(RET_VAL, retVal);
         }
-        CompiledScript script=expCache.get(exp);
-        if(null != script) {
-            return (T)script.eval(bindings);
+        CompiledScript script = expCache.get(exp);
+        if (null != script) {
+            return (T) script.eval(bindings);
         }
-        if(engine instanceof Compilable) {
-            Compilable compEngine=(Compilable)engine;
-            script=compEngine.compile(funcs + exp);
+        if (engine instanceof Compilable) {
+            Compilable compEngine = (Compilable) engine;
+            script = compEngine.compile(funcs + exp);
             expCache.put(exp, script);
-            return (T)script.eval(bindings);
+            return (T) script.eval(bindings);
         } else {
-            return (T)engine.eval(funcs + exp, bindings);
+            return (T) engine.eval(funcs + exp, bindings);
         }
     }
 

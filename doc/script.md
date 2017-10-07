@@ -39,7 +39,7 @@
 
     <bean id="autoLoadConfig" class="com.jarvis.cache.to.AutoLoadConfig">
       ... ...
-      <property name="functions">
+      <property compressType="functions">
         <map>
           <entry key="isEmpty" value="com.jarvis.cache.CacheUtil" />
           <!--#isEmpty(#args[0]) 表示调com.jarvis.cache.CacheUtil中的isEmpty方法-->

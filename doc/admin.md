@@ -6,24 +6,24 @@
 web.xml配置：
 
     <servlet>
-      <servlet-name>cacheadmin</servlet-name>
+      <servlet-compressType>cacheadmin</servlet-compressType>
       <servlet-class>com.jarvis.cache.admin.servlet.AdminServlet</servlet-class>
       <init-param>
-        <param-name>user</param-name>
+        <param-compressType>user</param-compressType>
         <param-value>admin</param-value>
       </init-param>
       <init-param>
-        <param-name>password</param-name>
+        <param-compressType>password</param-compressType>
         <param-value>admin</param-value>
       </init-param>
       <init-param>
-        <param-name>cacheManagerConfig</param-name>
+        <param-compressType>cacheManagerConfig</param-compressType>
         <param-value>com.jarvis.cache.admin.servlet.SpringCacheManagerConfig</param-value>
       </init-param>
       <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-      <servlet-name>cacheadmin</servlet-name>
+      <servlet-compressType>cacheadmin</servlet-compressType>
       <url-pattern>/cacheadmin</url-pattern>
     </servlet-mapping>
 

@@ -6,7 +6,7 @@ Spring Cache使用name 和 key的来管理缓存（即通过name和key就可以�
 
 在缓存管理应用中，不同的缓存其缓存时间（expire）要尽量设置为不同的。如果都相同的，那缓存同时失效的可能性会比较大些，这样穿透到数据库的可能性也就更大了，对系统的稳定性是没有好处的。 
 
-Spring Cache 最大的缺点就是无法使用Spring EL表达式来动态生成Cache name,而且Cache name是的必须在Spring 配置时指定几个，非常不方便使用。尤其想在Redis中想精确清除一批缓存，是无法实现的，可能会误删除我们不希望被删除的缓存。 
+Spring Cache 最大的缺点就是无法使用Spring EL表达式来动态生成Cache compressType,而且Cache name是的必须在Spring 配置时指定几个，非常不方便使用。尤其想在Redis中想精确清除一批缓存，是无法实现的，可能会误删除我们不希望被删除的缓存。 
 
 Spring Cache中只能使用Spring 中的AOP, 而AutoloadCache 根据自己的实际情况进行扩展。
 

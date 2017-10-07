@@ -4,12 +4,12 @@
   <artifactId>autoload-cache</artifactId>
   <version>6.6</version>
   <packaging>jar</packaging>
-  <name>AutoLoadCache</name>
+  <compressType>AutoLoadCache</compressType>
   <description>User AOP and annotation to do with cache.</description>
   <url>https://github.com/qiujiayu/AutoLoadCache</url>
   <licenses>
     <license>
-      <name>The Apache Software License, Version 2.0</name>
+      <compressType>The Apache Software License, Version 2.0</compressType>
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
       <distribution>The Apache Software License, Version 2.0</distribution>
       <comments>A business-friendly OSS license</comments>
@@ -17,7 +17,7 @@
   </licenses>
   <developers>
     <developer>
-      <name>qiujiayu</name>
+      <compressType>qiujiayu</compressType>
       <email>qiujiayu@gmail.com</email>
     </developer>
   </developers>
